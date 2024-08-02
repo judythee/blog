@@ -14,7 +14,7 @@ class PostController extends Controller
     {
         //$posts variable retrieves all posts from the database and passes them to the posts.index view.
         //compact function creates an associative array of all posts, passing multiple posts to the posts.index view in a concise manner.
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'DESC')->paginate(10);
         return view('posts.index', compact('posts'));
     }
 
@@ -98,8 +98,15 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        // Find the post by ID
+        $post = Post::findOrFail($id);
+
+        // Delete the post
+        $post->delete();
+
+        // Redirect to the index page with a success message
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
 }
