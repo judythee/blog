@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+
 
 class PagesController extends Controller
 {
     public function index(){
-        return view('pages.welcome');
-        //process variable data or params
-        //talk to the model
-        //receive from the model
-        //compile or process data from the model if needed
-        //pass that data to the correct view
+
+        // Fetch the latest 4 posts ordered by creation date in descending order
+        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+
+        // Pass the posts to the view
+        return view('pages.welcome', compact('posts'));
     }
 
     public function about(){

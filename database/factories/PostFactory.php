@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -21,7 +22,10 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'body' => $this->faker->paragraph,
+            'body' => $this->faker->realText(2000),
+            'slug' => $this->faker->slug,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

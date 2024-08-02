@@ -35,6 +35,15 @@
                             <button type="submit" class="btn btn-danger btn-lg w-100">Delete</button>
                         </form>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{{ route('posts.index') }}" class="btn btn-outline-light btn-block btn-h1-spacing" style="color: blue"><< See All Posts</a>
+                        </div>
+                    </div>
+                    
+                    
+
                 </div>
             </div>
         </div>
