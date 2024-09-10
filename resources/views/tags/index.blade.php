@@ -1,0 +1,54 @@
+@extends('main')
+
+@section('title', '| All Tags')
+
+
+
+@section('content')
+
+<div class="row">
+    <div class="col-md-8 card shadow-lg border-0" style="background-color: rgb(243, 243, 243); margin-top: 20px">
+        <table class="table table-hover table-light table-bordered table-striped">
+            <h2 class="row justify-content-center">Tags</h2>
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($tags as $tag)
+                <tr>
+                    <td>{{ $tag->id }}</td>
+                    <td>{{ $tag->name }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-lg border-0" style="background-color: rgb(243, 243, 243); margin-top: 20px">
+            <div class="card-header bg-dark text-white text-center">
+                <h2>New Tag</h2>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ route('tags.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-dark mx-auto">Create New Tag</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@endsection

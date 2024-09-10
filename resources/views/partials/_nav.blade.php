@@ -12,28 +12,39 @@
                   <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
+                  <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ url('blog') }}">Blog</a>
+              </li>
+              <li class="nav-item">
                   <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ url('about') }}">About</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ url('contact') }}">Contact</a>
               </li>
           </ul>
-          <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      My Account
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-              </li>
-          </ul>
+
+          @if (Auth::check())
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ Auth::user()->name }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a></li>
+                <li><a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a></li>
+                <li><a class="dropdown-item" href="{{ route('tags.index') }}">Tags</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}">Log out</a></li>
+            </ul>
+        </li>
+    </ul>
+@else
+    <a href="{{ route('login') }}" class="btn btn-outline-primary">Login</a>
+@endif
       </div>
   </div>
 </nav>
 
 
 {{-- end of navbar --}}
+
+

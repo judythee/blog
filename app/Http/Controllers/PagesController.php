@@ -1,8 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
+
+class YourController extends Controller
+{
+    public function postContact(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'subject' => 'min:3',
+            'message' => 'min:10'
+        ]);
+
+        $data = array(
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message
+        );
+
+        Mail::send('view', $data, function($message) use ($data) {
+            $message->from($data['email']);
+            $message->to('hello@example.com');
+            $message->subject($data['subject']);
+        });
+    }
+}
+
 use App\Models\Post;
 
 
@@ -33,5 +61,29 @@ class PagesController extends Controller
     public function contact()
     {
         return view('pages.contact');  
+    }
+    public function postcontact(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'subject' => 'min:3',
+            'message' => 'min:10'
+        ]);
+
+    $data = array(
+        'email' => $request->email,
+        'subject' => $request->subject,
+        'bodymessage' => $request->message
+    );
+
+        Mail::send('emails.contact', $data, function($message) use ($data){
+            $message->from($data['email']);
+            $message->to('hello@example.com');
+            $message->subject($data['subject']);
+        });
+
+        Session::flash('success', 'Your Email was Sent!');
+
+        return redirect()->to('/');
     }
 }

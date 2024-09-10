@@ -10,11 +10,11 @@
 
 @section('content')
     <div class="row mb-4">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <h1>All Posts</h1>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
             <a href="{{ route('posts.create') }}" class="btn btn-lg btn-block btn-primary btn-h1-spacing" >Create New Post</a>
         </div>
         
@@ -27,9 +27,9 @@
 
 
     <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover table-light">
-                <thead table-light>
+        <div class="col-md-12 card shadow-lg border-0" style="background-color: rgb(243, 243, 243)">
+            <table class="table table-hover table-light table-bordered table-striped">
+                <thead class="thead-dark">
                     <tr>
                         <th>#</th>
                         <th>Title</th>
@@ -46,8 +46,13 @@
                             <td>{{ Str::limit($post->body, 50) }}</td>
                             <td>{{ $post->created_at->format('F d, Y h:i A') }}</td>
                             <td>
-                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-sm">View</a>
-                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-2">
+                                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-primary" >View</a>
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary" >Edit</a>
+                                    </div>
                                 
                             </td>
                         </tr>

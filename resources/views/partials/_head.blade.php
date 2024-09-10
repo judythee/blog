@@ -9,3 +9,8 @@
 
     {{--asset function generates a URL for an asset, such as a CSS file, JavaScript file, image, or any other file that is stored in the public directory --}}
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
