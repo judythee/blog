@@ -5,16 +5,22 @@
 @section('content')
 <div class="row" >
     <div class="col-md-7 ">
-        <h1 class="display-4">{{ $post->title }}</h1>
-        <p class="lead">{{ $post->body }}</p>
-    </div>
-    <hr>
+        <div>
+            <h1 class="display-4">{{ $post->title }}</h1>
+            <p class="lead">{{ $post->body }}</p>
+        </div>
 
-    <div></div>
-        @foreach ($post->tags as $tag)
-            <span class="label label-default">{{$tag->name}}</span>
-        @endforeach
+        <hr>
+
+        <div>
+            @foreach ($post->tags as $tag)
+                <span class="label label-default">{{$tag->name}}</span>
+            @endforeach
+        </div>
     </div>
+    
+
+    
 
     <div class="col-md-5">
         <div class="card shadow-lg border-0" style="background-color: rgb(243, 243, 243); margin-top: 20px">
@@ -63,7 +69,43 @@
             </div>
         </div>
     </div>
+
+    <div id="backend-comments" style="margin-top: 50px;">
+        <h3>Comments &#128522;&#128073;<small>{{$post->comments()->count() }} total</small></h3>
+
+        <table class="table table-hover table-light table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Comment</th>
+                    <th width=150px></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($post->comments as $comment)
+                    <tr>
+                        <td>{{$comment->name}}</td>
+                        <td>{{$comment->email}}</td>
+                        <td>{{Str::limit($comment->comment, 50)}}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-6 mb-2">
+                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary" ><i class="bi bi-pencil"></i></a>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-sm btn-danger" ><i class="bi bi-trash"></i></a>
+                                </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </div>
+
 
 
 @endsection

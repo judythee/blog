@@ -23,11 +23,11 @@ class PostController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('posts.create')->withCategories($categories)->withTags($tags);
-    }
+{
+    $categories = Category::all();
+    $tags = Tag::all();
+    return view('posts.create', compact('categories', 'tags'));
+}
 
     /**
      * Store a newly created resource in storage.

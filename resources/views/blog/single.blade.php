@@ -4,12 +4,6 @@
 
 @section('title', "| $titleTag")
 
-@section('stylesheets')
-
-    @vite(['public/css/parsley.css', 'resources/css/app.css'])
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-@endsection
 
 @section('content')
 
@@ -26,7 +20,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h4 class="comments-title">
-                <span class="glyphicon glyphicon-comment"></span>{{$post->comments()->count()}}  Comments</h4>
+                 <i class="bi bi-chat "></i> {{$post->comments()->count()}}  Comments</h4>
             @foreach ($post->comments as $comment)
                 <div class="comment">
                     <div class="author-info">

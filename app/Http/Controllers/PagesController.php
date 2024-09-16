@@ -48,15 +48,16 @@ class PagesController extends Controller
     public function about(){
         $first = 'Alex';
         $last = 'Curtis';
-
-        $fullname = $first. " ".$last;
+    
+        $fullname = $first . " " . $last;
         $email = 'me@gmail.com';
         $data = [];
         $data['fullname'] = $fullname;
         $data['email'] = $email;
-
-        return view('pages.about')->withData($data);
+    
+        return view('pages.about', ['data' => $data]);
     }
+    
 
     public function contact()
     {
