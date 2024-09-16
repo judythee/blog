@@ -3,32 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CommentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request, $post_id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'comment' => 'required|string|min:5|max:200',
+        ]);
+    
+        // Find the post
+        $post = Post::findOrFail($post_id);
+    
+        // Create and associate the comment with the post
+        $comment = new Comment($validatedData);
+        $comment->approved = true;
+        $post->comments()->save($comment);
+    
+        // Flash success message
+        Session::flash('success', 'Comment was added');
+    
+        // Redirect back with a success message
+        return redirect()->route('blog.single', [$post->slug])->with('success', 'Comment added successfully!');
+
     }
 
     /**

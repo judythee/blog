@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentsController;
 
 
 
@@ -37,7 +38,7 @@ Route::middleware(['web'])->group(function () {
     Route::resource('tags', TagController::class)->except(['create'])->middleware('auth');
 
     //Comments
-    Route::post('comments/{post_id}', ['uses'=>'CommentsController@store', 'as' => 'comments.store']);
+    Route::post('comments/{post}', [CommentsController::class, 'store'])->name('comments.store');
 
     Route::get('blog/{slug}', [BlogController::class, 'single'])
     ->name('blog.single')
