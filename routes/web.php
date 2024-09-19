@@ -38,7 +38,15 @@ Route::middleware(['web'])->group(function () {
     Route::resource('tags', TagController::class)->except(['create'])->middleware('auth');
 
     //Comments
-    Route::post('comments/{post}', [CommentsController::class, 'store'])->name('comments.store');
+    // Route::post('comments/{post}', [CommentsController::class, 'store'])->name('comments.store');
+    
+    // Route::get('comments/{id}/edit', [CommentsController::class, 'edit'])->name('comments.edit');
+
+    // Route::put('comments/{id}', [CommentsController::class, 'update'])->name('comments.update');
+
+    // Route::delete('comments/{id}', [CommentsController::class, 'destroy'])->name('comments.destroy');
+
+    Route::resource('comments', CommentsController::class);
 
     Route::get('blog/{slug}', [BlogController::class, 'single'])
     ->name('blog.single')

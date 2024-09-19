@@ -92,10 +92,10 @@
                         <td>
                             <div class="row">
                                 <div class="col-sm-6 mb-2">
-                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary" ><i class="bi bi-pencil"></i></a>
+                                    <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-sm btn-primary" ><i class="bi bi-pencil"></i></a>
                                 </div>
                                 <div class="col-sm-6 mb-2">
-                                    <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-sm btn-danger" ><i class="bi bi-trash"></i></a>
+                                    <a href="{{ route('comments.destroy', $comment->id) }}" class="btn btn-sm btn-danger" ><i class="bi bi-trash"></i></a>
                                 </div>
                         </td>
                     </tr>

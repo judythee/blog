@@ -14,8 +14,6 @@
                 <div class="card-body p-4">
                     <form action="{{ route('posts.update', $post->id)}}" method="PUT">
                         @csrf
-                        
-
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" name="title" id="title" class="form-control form-control-lg" value="{{ $post->title }}" required >
